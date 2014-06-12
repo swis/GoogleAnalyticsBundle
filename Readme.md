@@ -108,7 +108,8 @@ I didn't decide on a license yet, but I'll do eventually.
 
 
 ## Configuration Reference
-```
+
+```json
 swis_google_analytics:
     tracking_id:                ~       # The Google Analytics tracking ID (e.g. UA-xxxxxxxx-x). Required.
     domain:                     ~       # If set, the configured host name is sent to Google instead of the really one retrieved from the called URL.
