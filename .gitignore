@@ -1,0 +1,6 @@
+# local filesystem related
+.DS_Store
+
+# IDE related
+/nbproject
+*.php~
