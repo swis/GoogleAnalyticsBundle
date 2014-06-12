@@ -1,0 +1,14 @@
+services:
+    swis_google_analytics_extension:
+        class:                              Swis\Bundle\GoogleAnalyticsBundle\Twig\GoogleAnalyticsExtension
+        arguments:                          [ "%swis_google_analytics.tracking_id%" ]
+        tags:
+            -                               { name: twig.extension }
+    kernel.listener.your_listener_name:
+        class:                              Swis\Bundle\GoogleAnalyticsBundle\Listener\AnalyticsListener
+        arguments:                          [ "@event_dispatcher" ]
+        tags:
+            -                               { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+            -                               { name: kernel.event_listener, event: security.implicit_login, method: onSecurityImplicitLogin }
+            -                               { name: kernel.event_listener, event: fos_user.registration.confirmed, method: onRegistrationConfirmed }
+            -                               { name: kernel.event_listener, event: fos_user.registration.completed, method: onRegistrationCompleted }
