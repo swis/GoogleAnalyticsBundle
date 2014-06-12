@@ -18,8 +18,10 @@ on the "Measurement Protocol API" [2].
 Besides the widely known pageview tracking, this bundle also provides an easy way
 for pushing custom events to Google via the lightweight JavaScript tracking code.
 
-Event pushing for some basic events, like logins and some user actions provided
-by the FOSUserBundle (registration, resetting, ...) is already included in the bundle.
+Event pushing for exceptions and other basic events, like logins and some user actions
+provided by the FOSUserBundle (registration, resetting, ...) is already included
+in the bundle. Please be aware that the number of events that can be sent is limited
+by Google.
 
 See https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
