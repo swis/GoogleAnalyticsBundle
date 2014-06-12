@@ -22,8 +22,8 @@ class SwisGoogleAnalyticsExtension extends Extension
         $loader->load('services.yml');
         
         $container->setParameter(
-            'swis_google_analytics.tracking_id',
-            $config['tracking_id']
+            'swis_google_analytics.config',
+            $config
         );
     }
 }

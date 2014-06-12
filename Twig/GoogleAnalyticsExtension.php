@@ -2,21 +2,20 @@
 
 namespace Swis\Bundle\GoogleAnalyticsBundle\Twig;
 
-use Swis\Bundle\GoogleAnalyticsBundle\Service\AnalyticsHandler;
-use Swis\Bundle\GoogleAnalyticsBundle\Service\TestHandler;
+use Swis\Bundle\GoogleAnalyticsBundle\Service\RequestAwareHandler;
 
 class GoogleAnalyticsExtension extends \Twig_Extension
 {
 
     protected $environment;
-    protected $trackingID;
+    protected $config;
 
     /**
-     * @param string $trackingID The Google Analytics tracking ID
+     * @param string $config The bundle config array
      */
-    public function __construct($trackingID)
+    public function __construct($config)
     {
-        $this->trackingID = $trackingID;
+        $this->config = $config;
     }
 
     public function initRuntime(\Twig_Environment $environment)
@@ -27,7 +26,7 @@ class GoogleAnalyticsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('swis_google_analytics', array($this, 'getGoogleAnalyticsTemplate'))
+            new \Twig_SimpleFunction('swis_google_analytics', array($this, 'getGoogleAnalyticsTemplate'), array('is_safe' => array('html')))
         );
     }
 
@@ -37,9 +36,8 @@ class GoogleAnalyticsExtension extends \Twig_Extension
         return $this->environment->render(
             'SwisGoogleAnalyticsBundle::tracking.html.twig',
             array(
-                'trackingID' => $this->trackingID,
-                'analyticsFlashbagName' => AnalyticsHandler::FLASHBAG_NAME,
-                'testFlashbagName' => TestHandler::FLASHBAG_NAME,
+                'config' => $this->config,
+                'flashbag_name' => RequestAwareHandler::FLASHBAG_NAME,
                 'error' => $error
             )
         );

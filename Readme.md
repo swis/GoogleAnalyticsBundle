@@ -40,6 +40,19 @@
     swis_google_analytics:
         tracking_id: UA-xxxxxxxx-x # Get this value from your Google Analytics account.
     ```
+4. Include the code snippet that is provided by a Twig function in your template before the closing ```</head>``` tag:
+
+    ```
+    <html>
+        <head>
+            <!-- ... //-->
+            {{ swis_google_analytics() }}
+        </head>
+        <!-- ... //-->
+    </html>
+    ```
+
+
 
 
 ## Configuration Reference
@@ -49,7 +62,6 @@ swis_google_analytics:
     domain:                     ~       # If set, the configured host name is sent to Google instead of the really one retrieved from the called URL.
     provide_opt_out:            false   # If set, a javascript function for opting out the Google tracking is provided. The function's name then is googleOptOut().
     site_speed_sample_rate:     100     # Defines the site speed sample rate. See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#siteSpeedSampleRate for details.
-    options:
-        anonymize_ip:           true    # Triggers the IP anonymization for privacy reasons. Required in some countries to be true.
-        enable_displayfeatures: true    # Enables the Google Analytics display features. See https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features for details.
+    anonymize_ip:               true    # Triggers the IP anonymization for privacy reasons. Required in some countries to be true.
+    enable_displayfeatures:     true    # Enables the Google Analytics display features. See https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features for details.
 ```
