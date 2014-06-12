@@ -3,10 +3,11 @@
 namespace Swis\Bundle\GoogleAnalyticsBundle\Listener;
 
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Swis\Bundle\GoogleAnalyticsBundle\Events\TrackingEvent;
 use Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler;
 
-class DefaultEventsListener
+class EventListener
 {
 
     /* @var $handler \Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler */
@@ -62,5 +63,25 @@ class DefaultEventsListener
     public function onRegistrationCompleted(Event $event)
     {
         $this->handler->addTrackingEvent(new TrackingEvent('accounts', 'registration', 'completed'));
+    }
+
+    /**
+     * Dispatches tracking of symfony exceptions.
+     *
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     */
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        $status = $event->getResponse() != null ? $event->getResponse()->getStatusCode() : null;
+        if (\is_null($status)) {
+            $status = -1;
+        }
+
+        $msg = $event->getException() != null ? \substr($event->getException()->getMessage(), 0, 16) : '';
+        if (empty($msg)) {
+            $msg = 'unknown';
+        }
+
+        $this->handler->addTrackingEvent(new TrackingEvent('exception', $status, $msg));
     }
 }
