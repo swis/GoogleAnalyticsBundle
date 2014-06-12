@@ -2,6 +2,7 @@
 ## Installation
 
 1. Include the dependency in your ```composer.json```:
+
     ```
     {
         ...,
@@ -14,6 +15,7 @@
     }
     ```
 2. Enable the Bundle in your ```app/AppKernel.php```:
+
     ```
     class AppKernel extends Kernel
     {
@@ -32,7 +34,8 @@
         /* ... */
     }
     ```
-3. Provide your Google Analytics Tracking ID somwhere in your ```app/config/config.yml```
+3. Provide your Google Analytics Tracking ID somewhere in your ```app/config/config.yml```:
+
     ```
     swis_google_analytics:
         tracking_id: UA-xxxxxxxx-x
