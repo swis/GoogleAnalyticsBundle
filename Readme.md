@@ -1,4 +1,51 @@
 
+
+## Description
+
+This bundle provides user tracking with Google Analytics for any Symfony2 project.
+
+Inside this bundle, only the new "Universal Analytics API" (i.e. "analytics.js")
+is used for pageview- and event tracking [1]. For the server-to-server (non-JavaScript)
+features - espacially in the context of ecommerce tracking - the bundles relies
+on the "Measurement Protocol API" [2].
+
+[1] https://developers.google.com/analytics/devguides/collection/analyticsjs/
+[2] https://developers.google.com/analytics/devguides/collection/protocol/v1/
+
+### Event tracking
+
+Besides the widely known pageview tracking, this bundle also provides an easy way
+for pushing custom events to Google via the lightweight JavaScript tracking code.
+
+Event pushing for some basic events, like logins and some user actions provided
+by the FOSUserBundle (registration, resetting, ...) is already included in the bundle.
+
+See https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+
+### Custom dimensions and metrics
+
+Coming soon.
+
+See https://developers.google.com/analytics/devguides/collection/analyticsjs/custom-dims-mets
+
+### Support for cross device tracking ("User ID")
+
+Coming soon.
+
+See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
+
+### Support for server-side A/B tests
+
+Coming soon.
+
+See https://developers.google.com/analytics/solutions/experiments-server-side
+
+### License
+
+I didn't decide on a license yet, but I'll do eventually.
+
+
+
 ## Installation
 
 1. Include the dependency in your ```composer.json```:
@@ -8,7 +55,7 @@
         ...,
         "require": {
             ...,
-            "swis/google-analytics-bundle": "1.0.*@dev",
+            "swis/google-analytics-bundle": "dev-master@dev",
             ...
         },
         ...
@@ -51,7 +98,11 @@
         <!-- ... //-->
     </html>
     ```
+5. That's it!
 
+
+
+## Usage
 
 
 
