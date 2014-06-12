@@ -41,6 +41,14 @@ class Configuration implements ConfigurationInterface
                 ->defaultTrue()
                 ->info('Enables the Google Analytics display features. See https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features for details.')
                 ->end()
+            ->booleanNode('enable_exceptions')
+                ->defaultTrue()
+                ->info('If set, exceptions are tracked via the JavaScript API.')
+                ->end()
+            ->booleanNode('enable_default_events')
+                ->defaultTrue()
+                ->info('If set, default events are tracked via the JavaScript API.')
+                ->end()
             ->end();
 
         return $treeBuilder;

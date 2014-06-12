@@ -11,7 +11,7 @@ class GoogleAnalyticsExtension extends \Twig_Extension
     protected $config;
 
     /**
-     * @param string $config The bundle config array
+     * @param array $config The bundle config array
      */
     public function __construct($config)
     {

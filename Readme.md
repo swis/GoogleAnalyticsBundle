@@ -2,14 +2,15 @@
 
 ## Description
 
-This bundle provides user tracking with Google Analytics for any Symfony2 project.
+This bundle provides comprehensive user tracking with Google Analytics for any Symfony2 project.
 
 Inside this bundle, only the new "Universal Analytics API" (i.e. "analytics.js")
 is used for pageview- and event tracking [1]. For the server-to-server (non-JavaScript)
-features - espacially in the context of ecommerce tracking - the bundles relies
+features - especially in the context of ecommerce tracking - the bundles relies
 on the "Measurement Protocol API" [2].
 
 [1] https://developers.google.com/analytics/devguides/collection/analyticsjs/
+
 [2] https://developers.google.com/analytics/devguides/collection/protocol/v1/
 
 ### Event tracking
@@ -48,9 +49,9 @@ I didn't decide on a license yet, but I'll do eventually.
 
 ## Installation
 
-1. Include the dependency in your ```composer.json```:
+1. Include this bundle as a dependency in your ```composer.json```:
 
-    ```
+    ```javascript
     {
         ...,
         "require": {
@@ -61,9 +62,9 @@ I didn't decide on a license yet, but I'll do eventually.
         ...
     }
     ```
-2. Enable the Bundle in your ```app/AppKernel.php```:
+2. Enable the bundle in your ```app/AppKernel.php```:
 
-    ```
+    ```php
     class AppKernel extends Kernel
     {
 
@@ -83,13 +84,13 @@ I didn't decide on a license yet, but I'll do eventually.
     ```
 3. Provide your Google Analytics Tracking ID somewhere in your ```app/config/config.yml```:
 
-    ```
+    ```yaml
     swis_google_analytics:
         tracking_id: UA-xxxxxxxx-x # Get this value from your Google Analytics account.
     ```
-4. Include the code snippet that is provided by a Twig function in your template before the closing ```</head>``` tag:
+4. Include the JavaScript code snippet in your template before the closing ```</head>``` tag:
 
-    ```
+    ```html
     <html>
         <head>
             <!-- ... //-->
@@ -115,4 +116,6 @@ swis_google_analytics:
     site_speed_sample_rate:     100     # Defines the site speed sample rate. See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#siteSpeedSampleRate for details.
     anonymize_ip:               true    # Triggers the IP anonymization for privacy reasons. Required in some countries to be true.
     enable_displayfeatures:     true    # Enables the Google Analytics display features. See https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features for details.
+    enable_exceptions:          true    # If set, exceptions are tracked via the JavaScript API. Please make sure, that you include the twig tag into your exception template to have the event connected to the right URL within GA.
+    enable_default_events:      true    # If set, default events are tracked via the JavaScript API, see the [DefaultEventsListener](https://github.com/swis/GoogleAnalyticsBundle/blob/master/Listener/DefaultEventsListener.php)
 ```

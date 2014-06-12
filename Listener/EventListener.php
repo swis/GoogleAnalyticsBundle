@@ -12,13 +12,18 @@ class EventListener
 
     /* @var $handler \Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler */
     protected $handler;
+    protected $enableEvents;
+    protected $enableExceptions;
 
     /**
      * @param \Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler $handler
+     * @param array $config The bundle config array
      */
-    public function __construct(FlashBagHandler $handler)
+    public function __construct(FlashBagHandler $handler, $config)
     {
         $this->handler = $handler;
+        $this->enableEvents = $config['enable_default_events'];
+        $this->enableExceptions = $config['enable_exceptions'];
     }
 
     /**
@@ -28,6 +33,10 @@ class EventListener
      */
     public function onSecurityInteractiveLogin(Event $event)
     {
+        if (!$this->enableEvents) {
+            return;
+        }
+
         $this->handler->addTrackingEvent(new TrackingEvent('accounts', 'login', 'interactive'));
     }
 
@@ -38,6 +47,10 @@ class EventListener
      */
     public function onSecurityImplicitLogin(Event $event)
     {
+        if (!$this->enableEvents) {
+            return;
+        }
+
         $this->handler->addTrackingEvent(new TrackingEvent('accounts', 'login', 'implicit'));
     }
 
@@ -49,6 +62,10 @@ class EventListener
      */
     public function onRegistrationConfirmed(Event $event)
     {
+        if (!$this->enableEvents) {
+            return;
+        }
+
         $this->handler->addTrackingEvent(new TrackingEvent('accounts', 'registration', 'confirmed'));
     }
 
@@ -62,6 +79,10 @@ class EventListener
      */
     public function onRegistrationCompleted(Event $event)
     {
+        if (!$this->enableEvents) {
+            return;
+        }
+
         $this->handler->addTrackingEvent(new TrackingEvent('accounts', 'registration', 'completed'));
     }
 
@@ -72,12 +93,16 @@ class EventListener
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
+        if (!$this->enableExceptions) {
+            return;
+        }
+
         $status = $event->getResponse() != null ? $event->getResponse()->getStatusCode() : null;
         if (\is_null($status)) {
             $status = -1;
         }
 
-        $msg = $event->getException() != null ? \substr($event->getException()->getMessage(), 0, 16) : '';
+        $msg = $event->getException() != null ? \substr($event->getException()->getMessage(), 0, 32) : '';
         if (empty($msg)) {
             $msg = 'unknown';
         }
