@@ -38,7 +38,7 @@
 
     ```
     swis_google_analytics:
-        tracking_id: UA-xxxxxxxx-x
+        tracking_id: UA-xxxxxxxx-x # Get this value from your Google Analytics account.
     ```
 
 
