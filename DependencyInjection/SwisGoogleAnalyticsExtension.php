@@ -20,10 +20,15 @@ class SwisGoogleAnalyticsExtension extends Extension
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.yml');
-        
+
         $container->setParameter(
             'swis_google_analytics.config',
             $config
+        );
+
+        $container->setParameter(
+            'swis_google_analytics.config_tests',
+            $config['tests']
         );
     }
 }

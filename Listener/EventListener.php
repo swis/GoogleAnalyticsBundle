@@ -5,21 +5,21 @@ namespace Swis\Bundle\GoogleAnalyticsBundle\Listener;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Swis\Bundle\GoogleAnalyticsBundle\Events\TrackingEvent;
-use Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler;
+use Swis\Bundle\GoogleAnalyticsBundle\Service\AnalyticsHandler;
 
 class EventListener
 {
 
-    /* @var $handler \Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler */
+    /* @var $handler \Swis\Bundle\GoogleAnalyticsBundle\Service\AnalyticsHandler */
     protected $handler;
     protected $enableEvents;
     protected $enableExceptions;
 
     /**
-     * @param \Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler $handler
+     * @param \Swis\Bundle\GoogleAnalyticsBundle\Service\AnalyticsHandler $handler
      * @param array $config The bundle config array
      */
-    public function __construct(FlashBagHandler $handler, $config)
+    public function __construct(AnalyticsHandler $handler, $config)
     {
         $this->handler = $handler;
         $this->enableEvents = $config['enable_default_events'];

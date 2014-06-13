@@ -1,16 +1,21 @@
 services:
     swis_google_analytics_extension:
         class:                              Swis\Bundle\GoogleAnalyticsBundle\Twig\GoogleAnalyticsExtension
-        arguments:                          [ "%swis_google_analytics.config%" ]
+        arguments:                          [ "@router", "%swis_google_analytics.config%" ]
         tags:
             -                               { name: twig.extension }
-    swis_google_analytics.flash_bag_handler:
-        class:                              Swis\Bundle\GoogleAnalyticsBundle\Service\FlashBagHandler
+    swis_google_analytics.analytics_handler:
+        class:                              Swis\Bundle\GoogleAnalyticsBundle\Service\AnalyticsHandler
+        calls:
+            -                               [setRequest, ["@?request="]]
+    swis_google_analytics.test_handler:
+        class:                              Swis\Bundle\GoogleAnalyticsBundle\Service\TestHandler
+        arguments:                          [ "%swis_google_analytics.config_tests%" ]
         calls:
             -                               [setRequest, ["@?request="]]
     swis_google_analytics.event_listener:
         class:                              Swis\Bundle\GoogleAnalyticsBundle\Listener\EventListener
-        arguments:                          [ "@swis_google_analytics.flash_bag_handler", "%swis_google_analytics.config%" ]
+        arguments:                          [ "@swis_google_analytics.analytics_handler", "%swis_google_analytics.config%" ]
         tags:
             -                               { name: kernel.event_listener, event: security.interactive_login,      method: onSecurityInteractiveLogin }
             -                               { name: kernel.event_listener, event: security.implicit_login,         method: onSecurityImplicitLogin }

@@ -1,0 +1,4 @@
+swis_google_analytics.tracking:
+    resource:                         Swis\Bundle\GoogleAnalyticsBundle\Controller\TrackingController
+    type:                             annotation
+    prefix:                           /

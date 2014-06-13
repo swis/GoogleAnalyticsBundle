@@ -4,8 +4,6 @@ namespace Swis\Bundle\GoogleAnalyticsBundle\Events;
 
 class TrackingEvent
 {
-    
-    const EVENT_NAME = 'swis_google_analytics_bundle_tracking_event';
 
     /** @var string */
     protected $category;

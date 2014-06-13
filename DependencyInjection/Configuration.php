@@ -49,6 +49,23 @@ class Configuration implements ConfigurationInterface
                 ->defaultTrue()
                 ->info('If set, default events are tracked via the JavaScript API.')
                 ->end()
+            ->arrayNode('tests')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
+                    ->info('The ID of the test as given by the Google Analytics web site.')
+                    ->children()
+                    ->integerNode('participation')
+                        ->isRequired()
+                        ->min(0)->max(100)
+                        ->info('The percentage of users that should participate on the test, must be between 0 and 100.')
+                        ->end()
+                    ->integerNode('variants')
+                        ->isRequired()
+                        ->min(0)
+                        ->info('The number of variants you want to test. The original version should NOT be counted here, that is, for "original vs. variant 1 vs. variant 2" this value should be 2.')
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

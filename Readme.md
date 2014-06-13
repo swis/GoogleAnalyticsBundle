@@ -25,6 +25,14 @@ by Google.
 
 See https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
+### Enhanced link attribution
+
+The code snippet for the enhanced link attribution (```ga('require', 'linkid', 'linkid.js');```)
+is included in the JavaScript tag. Please make sure, every link and every button
+has a unique id, since this is required for Google to properly track the links.
+
+See https://support.google.com/analytics/answer/2558867
+
 ### Custom dimensions and metrics
 
 Coming soon.
@@ -101,6 +109,17 @@ I didn't decide on a license yet, but I'll do eventually.
         <!-- ... //-->
     </html>
     ```
+5. If you want to use the Measurement Protocol features, then you need the clientId
+from the Google Analytics tracking cookie. To internally track this clientId, just
+include the routes from this bundle and everything else is done automatically when
+you then set a userId.
+You can change the prefix to whatever you want.
+
+    ```yaml
+    swis_google_analytics:
+        resource:               "@SwisGoogleAnalyticsBundle/Resources/config/routing.yml"
+        prefix:                 /tracking
+    ```
 5. That's it!
 
 
@@ -121,4 +140,12 @@ swis_google_analytics:
     enable_displayfeatures:     true    # Enables the Google Analytics display features. See https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features for details.
     enable_exceptions:          true    # If set, exceptions are tracked via the JavaScript API. Please make sure, that you include the twig tag into your exception template to have the event connected to the right URL within GA.
     enable_default_events:      true    # If set, default events are tracked via the JavaScript API, see the [DefaultEventsListener](https://github.com/swis/GoogleAnalyticsBundle/blob/master/Listener/DefaultEventsListener.php)
+    tests:                              # This section is optional and only if you want to make use of the server-side test features.
+        testID1:                        # This name of the following array should be the ID of the test as given by the Google Analytics web site, e.g. Sbz39RY3R5SwOKwKV10OxA.
+            participation:      xx      # The percentage of users that should participate on the test, must be between 0 and 100. Required.
+            variants:           x       # The number of variants you want to test. The original version should NOT be counted here, that is, for "original vs. variant 1 vs. variant 2" this value should be 2. Required.
+        testID2:                        # This name of the following array should be the ID of the test as given by the Google Analytics web site, e.g. Sbz39RY3R5SwOKwKV10OxA.
+            participation:      xx      # The percentage of users that should participate on the test, must be between 0 and 100. Required.
+            variants:           x       # The number of variants you want to test. The original version should NOT be counted here, that is, for "original vs. variant 1 vs. variant 2" this value should be 2. Required.
+        ...
 ```

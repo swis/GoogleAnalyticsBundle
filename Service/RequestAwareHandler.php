@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 abstract class RequestAwareHandler
 {
 
-    /** @const FLASHBAG_NAME Used as the session parameter name for the analytics event data flashbag. */
-    const FLASHBAG_NAME = 'swis_google_analytics';
-
-    /** @var \Symfony\Component\HttpFoundation\Request $request */
+    /** @var \Symfony\Component\HttpFoundation\Request */
     protected $request = null;
+
+    /** @var \Symfony\Component\HttpFoundation\Session\Session */
+    protected $session = null;
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -20,6 +20,10 @@ abstract class RequestAwareHandler
     public function setRequest(Request $request = null)
     {
         $this->request = $request;
+
+        if (!\is_null($request)) {
+            $this->session = $request->getSession();
+        }
     }
 
     /**
