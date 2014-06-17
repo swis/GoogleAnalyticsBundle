@@ -18,7 +18,7 @@ class AnalyticsHandler extends RequestAwareHandler
      */
     public function addTrackingEvent(TrackingEvent $event)
     {
-        if (\is_null($this->request)) {
+        if (\is_null($this->session)) {
             return;
         }
 
@@ -32,7 +32,7 @@ class AnalyticsHandler extends RequestAwareHandler
      */
     public function addMetricEvent(MetricEvent $event)
     {
-        if (\is_null($this->request)) {
+        if (\is_null($this->session)) {
             return;
         }
 

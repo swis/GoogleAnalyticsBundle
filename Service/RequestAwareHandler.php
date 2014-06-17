@@ -34,11 +34,14 @@ abstract class RequestAwareHandler
      */
     protected function getSessionFlashBag()
     {
-        $session = $this->request->getSession();
-        if (!$session->has(static::FLASHBAG_NAME)) {
-            $session->set(static::FLASHBAG_NAME, new FlashBag());
+        if (\is_null($this->session)) {
+            throw new \Exception();
         }
 
-        return $session->get(static::FLASHBAG_NAME);
+        if (!$this->session->has(static::FLASHBAG_NAME)) {
+            $this->session->set(static::FLASHBAG_NAME, new FlashBag());
+        }
+
+        return $this->session->get(static::FLASHBAG_NAME);
     }
 }

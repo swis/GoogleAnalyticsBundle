@@ -24,7 +24,7 @@ class TestHandler extends RequestAwareHandler
 
     public function getTestVariation($testID)
     {
-        if (\is_null($this->request)) {
+        if (\is_null($this->session)) {
             return;
         }
 
