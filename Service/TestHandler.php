@@ -47,7 +47,7 @@ class TestHandler extends RequestAwareHandler
              * Participating in test. Roll a dice to choose variation.
              */
 
-            return $this->setTestValue($testID, $this->decideVariation($params['variants']));
+            return $this->setTestValue($testID, $this->decideVariation($params['distribution']));
         }
 
         /*
