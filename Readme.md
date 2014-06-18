@@ -142,10 +142,8 @@ swis_google_analytics:
     enable_default_events:      true    # If set, default events are tracked via the JavaScript API, see the [DefaultEventsListener](https://github.com/swis/GoogleAnalyticsBundle/blob/master/Listener/DefaultEventsListener.php)
     tests:                              # This section is optional and only if you want to make use of the server-side test features.
         testID1:                        # This name of the following array should be the ID of the test as given by the Google Analytics web site, e.g. Sbz39RY3R5SwOKwKV10OxA.
-            participation:      xx      # The percentage of users that should participate on the test, must be between 0 and 100. Required.
-            variants:           x       # The number of variants you want to test. The original version should NOT be counted here, that is, for "original vs. variant 1 vs. variant 2" this value should be 2. Required.
-        testID2:                        # This name of the following array should be the ID of the test as given by the Google Analytics web site, e.g. Sbz39RY3R5SwOKwKV10OxA.
-            participation:      xx      # The percentage of users that should participate on the test, must be between 0 and 100. Required.
-            variants:           x       # The number of variants you want to test. The original version should NOT be counted here, that is, for "original vs. variant 1 vs. variant 2" this value should be 2. Required.
+            distribution:       [x, y]  # The distribution across the original and the variants, e.g. [.8, .15, .05] means that we have the original and 2 variants and the 1st variant should be applied to 15% of the visitors and the 2nd variant to 5%.
+        testID2:                        # ...
+            distribution:       [x, y]
         ...
 ```

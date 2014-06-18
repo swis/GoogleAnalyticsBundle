@@ -38,40 +38,26 @@ class TestHandler extends RequestAwareHandler
              */
 
             $variation = \intval($this->getTestValue($testID));
-            if ($variation >= 0 && $variation <= $params['variants']) {
+            if ($variation >= 0 && $variation < \count($params['distribution'])) {
                 $this->getSessionFlashBag()->set($testID, $variation);
                 return $variation;
             }
 
             /*
-             * Decide things.
+             * Participating in test. Roll a dice to choose variation.
              */
 
-            if ($this->decideParticipation($params['participation'])) {
-                // participating in test; roll a dice to choose showed variation
-                return $this->setTestValue($testID, $this->decideVariation($params['variants']));
-            }
+            return $this->setTestValue($testID, $this->decideVariation($params['variants']));
         }
 
         /*
          * Not participating in test; set showed variation to original
          */
+
         return $this->setTestValue($testID, 0);
     }
 
-    private function decideParticipation($percentageParticipating)
-    {
-        /*
-         * TODO:
-         * Get participation percentage from Google API,
-         * see https://developers.google.com/analytics/solutions/experiments-server-side
-         */
-
-        \mt_srand();
-        return \mt_rand(1, 100) <= $percentageParticipating;
-    }
-
-    private function decideVariation($variationCount)
+    private function decideVariation($distribution)
     {
         /*
          * TODO:
@@ -80,7 +66,17 @@ class TestHandler extends RequestAwareHandler
          */
 
         \mt_srand();
-        return \mt_rand(1, $variationCount);
+        $rnd = \mt_rand(0, 1);
+
+        $sum = .0;
+        foreach ($distribution as $key => $percentage) {
+            $sum += $percentage;
+            if ($rnd < $sum) {
+                return \intval($key);
+            }
+        }
+
+        return 0;
     }
 
     private function setTestValue($testID, $variation)
