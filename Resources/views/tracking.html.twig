@@ -3,7 +3,7 @@
     <script>
         var gaProperty = '{{ config.tracking_id }}';
 
-        {% if config.provide_opt_out %}
+        {% if config.provide_opt_out == true %}
             var disableStr = 'ga-disable-' + gaProperty;
             if (document.cookie.indexOf(disableStr + '=true') > -1) {
                 window[disableStr] = true;
