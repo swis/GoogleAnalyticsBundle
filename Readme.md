@@ -29,7 +29,7 @@ See https://developers.google.com/analytics/devguides/collection/analyticsjs/eve
 
 The code snippet for the enhanced link attribution (```ga('require', 'linkid', 'linkid.js');```)
 is included in the JavaScript tag. Please make sure, every link and every button
-has a unique id, since this is required for Google to properly track the links.
+has a unique id, since this is required for Google to track the links properly.
 
 See https://support.google.com/analytics/answer/2558867
 
