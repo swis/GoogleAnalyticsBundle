@@ -46,7 +46,7 @@
         {% endfor %}
 
         {% for testID, variation in app.session.get(test_flashbag_name)|default([]) %}
-            ga('set', 'expId', '{{ testID[17:] }}');
+            ga('set', 'expId', '{{ testID }}');
             ga('set', 'expVar', '{{ variation[0] }}');
         {% endfor %}
 

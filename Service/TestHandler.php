@@ -81,15 +81,14 @@ class TestHandler extends RequestAwareHandler
 
     private function setTestValue($testID, $variation)
     {
-        $key = self::KEY_PREFIX . $testID;
-        $this->session->set($key, $variation);
-        $this->getSessionFlashBag()->set($key, $variation);
+        $this->session->set($testID, $variation);
+        $this->getSessionFlashBag()->set($testID, $variation);
 
         return $variation;
     }
 
     private function getTestValue($testID)
     {
-        return $this->session->get(self::KEY_PREFIX . $testID, -1);
+        return $this->session->get($testID, -1);
     }
 }
