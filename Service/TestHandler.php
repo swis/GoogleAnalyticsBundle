@@ -66,11 +66,11 @@ class TestHandler extends RequestAwareHandler
          */
 
         \mt_srand();
-        $rnd = \mt_rand(0, 1);
+        $rnd = \mt_rand(0, 100000);
 
         $sum = .0;
         foreach ($distribution as $key => $percentage) {
-            $sum += $percentage;
+            $sum += $percentage * 100000.0;
             if ($rnd < $sum) {
                 return \intval($key);
             }
